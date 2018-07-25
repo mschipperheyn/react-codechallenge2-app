@@ -21,7 +21,7 @@ const Users = props => {
     return (
         <div className="table">
             <Head/>
-            {Map(props.users, props.onChangeClick, props.onDeleteClick)}
+            {Map(props.children, props.onChangeClick, props.onDeleteClick)}
         </div>
     ); 
 };

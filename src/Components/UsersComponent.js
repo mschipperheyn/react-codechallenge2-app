@@ -32,9 +32,10 @@ class UsersComponent extends Component {
       
         return (
             <Users 
-            users={this.state.users}
-            onDeleteClick={onDeleteClick}
-            onChangeClick={this.props.onChangeClick}/>
+              onDeleteClick={onDeleteClick}
+              onChangeClick={this.props.onChangeClick}>
+                {this.state.users}
+            </Users>
         );
     }
 }
