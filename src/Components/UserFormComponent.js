@@ -6,65 +6,58 @@ class UserFormComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: { name: '', email: '', city: '', id: null }
+            name: '', 
+            email: '', 
+            city: '', 
+            id: null
         }
     }
 
-    nameChangeHandler = event => {
-        this.setState({
-            user: { 
-            name: event.target.value, 
-            email: this.state.user.email, 
-            city: this.state.user.city, 
-            id: this.state.user.id
-            }
-        })
-    }
-    
-    emailChangeHandler = event => {
-        this.setState({
-            user: { 
-            name: this.state.user.name, 
-            email: event.target.value, 
-            city: this.state.user.city,
-            id: this.state.user.id
-            }
-        })
-    }
-    
-    cityChangeHandler = event => {
-        this.setState({
-            user: { 
-            name: this.state.user.name, 
-            email: this.state.user.email, 
-            city: event.target.value,
-            id: this.state.user.id
-            }
-        })
-    }
-
-    
     render() {
+        const onChange = e =>{
+            this.setState({[e.target.name]: e.target.value});
+        }
+
         const clear = () =>{
             this.setState({
-                user: { name: '', email: '', city: '', id: null }
+                name: '', 
+                email: '', 
+                city: '', 
+                id: null
             });
         }
 
         const onSubmit = e =>{
             e.preventDefault();
-            this.props.onSubmit(this.state.user);
+
+            this.props.onSubmit(this.state);
+
+            // const post = {
+            //     id: this.state.id,
+            //     name: this.state.name,
+            //     email: this.state.email,
+            //     city: this.state.city,
+            // }
+
+            // fetch('', {
+            //     method: 'POST',
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(post)
+            // })
+            // .then(res => res.json())
+            // .then(data => consol.log(data));
+
             clear();
         }
       
         return (
             <UserForm 
-                name={this.state.user.name}
-                email={this.state.user.email}
-                city={this.state.user.city}
-                onNameChange={this.nameChangeHandler}
-                onEmailChange={this.emailChangeHandler}
-                onCityChange={this.cityChangeHandler}
+                name={this.state.name}
+                email={this.state.email}
+                city={this.state.city}
+                onChange={onChange}
                 onSubmit={onSubmit}
                 onClear={clear}
             />

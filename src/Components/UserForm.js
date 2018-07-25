@@ -20,17 +20,17 @@ const UserForm = props => {
                 <div style={styles.cell}>
                     <label>Name: </label>
                     <br/>
-                    <input type="text" name="name" onChange={props.onNameChange} value={props.name}/>
+                    <input type="text" name="name" onChange={props.onChange} value={props.name}/>
                 </div>
                 <div style={styles.cell}>
                     <label>E-mail: </label>
                     <br/>
-                    <input type="text" name="email" onChange={props.onEmailChange} value={props.email}/>
+                    <input type="text" name="email" onChange={props.onChange} value={props.email}/>
                 </div>
                 <div style={styles.cell}>
                     <label>City: </label>
                     <br/>
-                    <input type="text" name="city" onChange={props.onCityChange} value={props.city}/>
+                    <input type="text" name="city" onChange={props.onChange} value={props.city}/>
                 </div>
 
                 <button type="submit">Submit</button>
