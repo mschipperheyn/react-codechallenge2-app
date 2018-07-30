@@ -1,0 +1,33 @@
+{
+  "name": "razzle-examples-with-redux",
+  "version": "2.3.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "razzle start",
+    "build": "razzle build",
+    "test": "razzle test --env=jsdom",
+    "start:prod": "NODE_ENV=production node build/server.js"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "prop-types": "^15.6.0",
+    "qs": "^6.4.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "serialize-javascript": "^1.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.2.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "json-server": "^0.14.0",
+    "razzle": "^2.2.0"
+  }
+}
