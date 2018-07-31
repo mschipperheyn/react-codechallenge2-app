@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { fetchUsers } from '../Actions'
 
 class Users extends Component {
-  UNSAFE_componentWillMount () {
+  constructor (props) {
+    super(props)
     this.props.fetchUsers()
   }
 
@@ -35,7 +36,6 @@ Users.propTypes = {
 
 const mapStateToPprops = state => ({
   users: state.users
-  // newUser: state.posts.user
 })
 
 export default connect(mapStateToPprops, { fetchUsers })(Users)

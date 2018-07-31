@@ -67,10 +67,10 @@ class UserForm extends Component {
   }
 }
 
-// UserForm.propTypes = {
-//   // createPost: PropTypes.func.isRequired,
-//   // user: PropTypes.array.isRequired
-// }
+UserForm.propTypes = {
+  // createPost: PropTypes.func.isRequired,
+  // user: PropTypes.array.isRequired
+}
 
 const mapStateToPprops = state => ({
   userEdit: state.user

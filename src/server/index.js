@@ -3,8 +3,6 @@ import { Provider } from 'react-redux'
 import React from 'react'
 import store from '../common/store/configureStore'
 import express from 'express'
-// import { selectUsers } from '../common/api';
-import qs from 'qs'
 import { renderToString } from 'react-dom/server'
 import serialize from 'serialize-javascript'
 
