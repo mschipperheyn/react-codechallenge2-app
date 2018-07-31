@@ -34,7 +34,7 @@ Users.propTypes = {
 }
 
 const mapStateToPprops = state => ({
-  users: state.posts.users
+  users: state.users
   // newUser: state.posts.user
 })
 

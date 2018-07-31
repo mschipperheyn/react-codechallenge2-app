@@ -1,14 +1,10 @@
-import { EDIT } from '../Actions'
+import { FETCH_USER } from '../Actions'
 
-const initialState = {
-  name: '', 
-  email: '', 
-  city: ''
-}
+const initialState = []
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case EDIT:
+    case FETCH_USER:
       return action.payload
     default:
       return state

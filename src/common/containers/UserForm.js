@@ -73,7 +73,7 @@ class UserForm extends Component {
 // }
 
 const mapStateToPprops = state => ({
-  userEdit: state.posts.user
+  userEdit: state.user
 })
 
 export default connect(mapStateToPprops, {clear})(UserForm)
