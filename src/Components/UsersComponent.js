@@ -1,47 +1,41 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Users from './Users';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Users, UsersMap } from 'react-codechallenge2-const'
+import { connect } from 'react-redux'
+import { fetchUsers } from '../Actions/postActions'
 
 class UsersComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users : []
-        }
+  componentWillMount () {
+    this.props.fetchUsers()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState(nextProps.users)
+  }
+
+  render () {
+    const onDeleteClick = id => {
+      this.props.onDeleteClick(id)
     }
 
-    componentWillMount() {
-        this.setState({
-            // users : []
-            users: [
-                {name: 'Clack Houf Time', email: 'chtime@email.com', city: 'New York', id: 1},
-                {name: 'Clack Houf Time2', email: 'chtime2@email.com', city: 'New York', id: 2},
-                {name: 'myname3', email: 'myemail3', city: 'mycity3', id: 3 }
-            ]
-        })
-        // fetch('')
-        // .then(res => res.json())
-        // .then(data => this.setState({users: data}));
-    }
-
-    render() {
-          const onDeleteClick = id =>{
-            console.log(id);
-            this.props.onDeleteClick(id);
-          } 
-      
-        return (
-            <Users 
-              onDeleteClick={onDeleteClick}
-              onChangeClick={this.props.onChangeClick}>
-                {this.state.users}
-            </Users>
-        );
-    }
+    return (
+      <Users
+        onDeleteClick={onDeleteClick}
+        onChangeClick={this.props.onChangeClick}>
+        {UsersMap(this.props.users, this.props.onChangeClick, onDeleteClick)}
+      </Users>
+    )
+  }
 }
 
 UsersComponent.propTypes = {
+  // fetchUsers: PropTypes.func.IsRequired,
+  users: PropTypes.narray.IsRequired
+}
 
-};
+const mapStateToPprops = state => ({
+  users: state.users
+  // newUser: state.posts.user
+})
 
-export default UsersComponent;
+export default connect(mapStateToPprops, { fetchUsers })(UsersComponent)

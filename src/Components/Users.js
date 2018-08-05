@@ -1,29 +1,41 @@
-import React from 'react';
-import User from './Users/User'
-import Head from './Users/Head'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Users as UsersConst, UsersMap } from 'react-codechallenge2-const'
+import { connect } from 'react-redux'
+import { fetchUsers } from '../Actions/postActions'
 
-const Map = (users, onChangeClick, onDeleteClick) => {
+class Users extends Component {
+  componentWillMount () {
+    this.props.fetchUsers()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState(nextProps.users)
+  }
+
+  render () {
+    const onDeleteClick = id => {
+      this.props.onDeleteClick(id)
+    }
+
     return (
-        users.map((user, index) => (
-        <User
-            key={index}
-            name={user.name}
-            email={user.email}
-            city={user.city}
-            onDeleteClick={()=> onDeleteClick(user.id)}
-            onChangeClick={() => onChangeClick(user)}
-            />
-    )));
-};
+      <UsersConst
+        onDeleteClick={onDeleteClick}
+        onChangeClick={this.props.onChangeClick}>
+        {UsersMap(this.props.users, this.props.onChangeClick, onDeleteClick)}
+      </UsersConst>
+    )
+  }
+}
 
-const Users = props => {
+Users.propTypes = {
+  // fetchUsers: PropTypes.func.IsRequired,
+  // users: PropTypes.array.IsRequired
+}
 
-    return (
-        <div className="table">
-            <Head/>
-            {Map(props.children, props.onChangeClick, props.onDeleteClick)}
-        </div>
-    ); 
-};
+const mapStateToPprops = state => ({
+  users: state.users
+  // newUser: state.posts.user
+})
 
-export default Users;
+export default connect(mapStateToPprops, { fetchUsers })(Users)

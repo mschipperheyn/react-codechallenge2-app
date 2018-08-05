@@ -1,52 +1,50 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import UsersComponent from './Components/UsersComponent';
-import UserFormComponent from './Components/UserFormComponent';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import Users from './Components/Users'
+import UserForm from './Components/UserForm'
+import { fetchUsers, edit } from './Actions/postActions'
+
+import { Provider } from 'react-redux'
+
+import store from './store'
+import { deleteUser } from './api'
 
 class App extends Component {
-  state = {
-    users: [
-      {name: 'Clack Houf Time', email: 'chtime@email.com', city: 'New York', id: 1},
-      {name: 'Clack Houf Time2', email: 'chtime2@email.com', city: 'New York', id: 2},
-      {name: 'myname3', email: 'myemail3', city: 'mycity3', id: 3 }
-    ],
-    user: { name: '', email: '', city: '', id: null }
-  }
-
-  render() {
-    
-    const onDelete = id =>{
-      // console.log(id);
-    } 
-
-    const onChange = user =>{
-      console.log(user);
+  render () {
+    const onDelete = id => {
+      deleteUser(id)
+        .then(res => res.json())
+        .then(_user => store.dispatch(fetchUsers()))
     }
 
-    const onSubmit = user =>{
-      // e.preventDefault();
-      console.log(user);
+    const onChange = user => {
+      store.dispatch(edit(user))
+    }
+
+    const onSaved = () => {
+      store.dispatch(fetchUsers())
     }
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+      <Provider store={store}>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Welcome to React</h1>
+          </header>
 
-        <UserFormComponent 
-          onSubmit={onSubmit}
-        />
-        {/* <Users users={users}/> */}
-        <UsersComponent 
-          onChangeClick={onChange}
-          onDeleteClick={onDelete}
-        />
-      </div>
-    );
+          <UserForm
+            onSaved={onSaved}
+          />
+          <Users
+            onChangeClick={onChange}
+            onDeleteClick={onDelete}
+          />
+        </div>
+      </Provider>
+    )
   }
 }
 
-export default App;
+export default App
